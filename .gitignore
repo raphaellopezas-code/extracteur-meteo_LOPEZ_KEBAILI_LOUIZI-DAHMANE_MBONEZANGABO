@@ -1,0 +1,19 @@
+# Ignorer les fichiers temporaires et logs
+*.log
+*.tmp
+
+# Fichiers météo générés par le script
+data/meteo*.txt
+
+# Fichiers d’archive et historiques
+data/*.tar
+data/*.zip
+
+# Fichiers système ou d’éditeur
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Fichiers de test ou temporaires
+tests/tmp/
