@@ -14,7 +14,7 @@ TEMP_ACTUELLE=$(echo "$METEO_BRUTE" | grep '"avgtempC":' | head -n 1 | awk -F'"'
 
 # 2. Température prévue pour demain
 # On récupère une ligne spécifique de wttr.in
-PREVISION=$(echo "$METEO_BRUTE" | grep -A 20 '"date":' | grep -A 20 "${DATE}" | grep '"avgtempC"' | awk -F'"' '{print $4 "°C"}')
+PREVISION=$(echo "$METEO_BRUTE" | grep -A 20 '"date":' | head -n 21 | grep '"avgtempC"' | awk -F'"' '{print $4 "°C"}')
 
 # 3. Enregistrer les données dans meteo.txt
 LIGNE="${DATE} - ${HEURE} - ${VILLE} : ${TEMP_ACTUELLE} - ${PREVISION}" 
