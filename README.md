@@ -1,12 +1,12 @@
 
 # extracteur-meteo_LOPEZ_KEBAILI_LOUIZI-DAHMANE_MBONEZANGABO
 
-# 🛰️ Extracteur Météo
+# Extracteur Météo
 
-## 🎯 Objectif du projet
+## � Objectif du projet
 Créer un script Shell permettant d'extraire périodiquement la température actuelle et la prévision du lendemain pour une ville donnée à partir du service [wttr.in](https://wttr.in).
 
-## 👥 Équipe
+## Équipe
 - Lopez Raphaël
 - Houria Kebaili
 - Jean Darcy Mbonezangabo
@@ -17,5 +17,5 @@ Encadrants :
 - M. Chebaro
 - M. Catteau
 
-## 🧩 Structure du projet
+##  Structure du projet
 
