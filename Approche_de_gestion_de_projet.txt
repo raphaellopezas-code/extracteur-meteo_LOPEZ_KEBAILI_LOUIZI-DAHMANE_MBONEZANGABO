@@ -1,0 +1,45 @@
+Notre approche de projet est axée sur le développement du projet par petite partie exécutée par chaque membre de l'équipe. Elles se font en suivant ces grandes parties :
+
+1. Définition et cadrage du projet :
+
+Analyse des besoins, des objectifs et des attentes sur le projet.
+
+Réalisation de réunions fréquentes pour des échanges clairs et partagés.
+
+Identification des risques, contraintes et ressources nécessaires en réunion.
+
+Création d’un plan de projet en suivant l'énoncé moodle avec un calendrier et des indicateurs de performance (Jira).
+
+2. Planification
+
+Découpage du projet en lots de travail.
+
+Répartition des rôles au sein de l’équipe.
+
+Mise en place d’un outil de suivi (Gantt, sur Jira).
+
+Communication sur Teams.
+
+3. Exécution et suivi
+
+Suivi régulier de l’avancement (réunions d’équipe).
+
+Mise à l'écrit des étapes importantes du projet qui sont faites
+
+Maintien d’une communication entre les membres de l'équipe.
+
+4. Contrôle et ajustement
+
+Mesure de la performance à l’aide des indicateurs définis (délai, énoncé de projet).
+
+Ajustement du plan en fonction des imprévus et retours des membres de l'équipe.
+
+Gestion des changements en discutant d'une solution en réunion.
+
+5. Clôture du projet
+
+Validation du projet en interne en fonction de l'énoncé.
+
+Mise à disposition du projet complet sur GitHub.
+
+Partage du projet aux professeurs.
