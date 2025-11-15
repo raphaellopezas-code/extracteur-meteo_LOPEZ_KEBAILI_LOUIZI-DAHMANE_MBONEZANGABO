@@ -19,3 +19,17 @@ Encadrants :
 
 ## Structure du projet
 
+Utilisation de cron :
+ Pour automatiser ce script avec CRON, tapez :
+
+     crontab -e
+
+ Puis ajoutez une ligne comme :
+
+ Exemple : exécuter chaque jour à 08h00
+ 0 8 * * * /chemin/vers/Extracteur_Météo.sh Toulouse
+
+ Exemple : exécuter toutes les heures
+ 0 * * * * /chemin/vers/Extracteur_Météo.sh
+
+ Le fichier meteo.txt sera mis à jour automatiquement.
