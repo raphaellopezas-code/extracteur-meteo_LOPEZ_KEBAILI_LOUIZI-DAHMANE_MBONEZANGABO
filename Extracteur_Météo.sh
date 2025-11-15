@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VILLE=${1:-Toulouse}
+VILLE=$1
 
 DATE=$(date +"%Y-%m-%d")
 HEURE=$(date +"%H:%M")
