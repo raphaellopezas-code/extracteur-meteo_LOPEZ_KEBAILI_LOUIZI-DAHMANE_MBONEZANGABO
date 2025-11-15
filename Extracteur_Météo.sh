@@ -1,26 +1,27 @@
 #!/bin/bash
 
-# Vérification qu'une ville a été passée en argument
-if [ -z "$1" ]; then
-  echo "Utilisation : ./Extracteur_Météo.sh <ville>"
-  exit 1
-fi
+VILLE=${1:-Toulouse}
 
-VILLE=$1
 DATE=$(date +"%Y-%m-%d")
 HEURE=$(date +"%H:%M")
 
-# 1. Récupération des données météo avec wttr.in
-# (format texte simple)
-METEO_BRUTE=$(curl -s "https://wttr.in/${VILLE}?format=3")
+METEO_TEXTE=$(curl -s wttr.in/${VILLE}?format=v2)
 
-# On veut récupérer la température actuelle
-TEMP_ACTUELLE=$(echo "$METEO_BRUTE" | grep -oE '[+-]?[0-9]+°C')
+if [[ -z "$METEO_TEXTE" ]]; then
+    METEO_TEXTE=$(curl -s wttr.in/${VILLE})
+fi
 
-# 2. Température prévue pour demain
-# On récupère une ligne spécifique de wttr.in
-PREVISION=$(curl -s "https://wttr.in/${VILLE}?format=%t+%T" | tail -n 1)
+TEMP_ACTUELLE=$(echo "$METEO_TEXTE" | grep -m1 -E "[0-9]+°C" | grep -oE "[0-9]+°C")
 
-# 3. Afficher les données
-echo "${DATE} - ${HEURE} - ${VILLE} : ${TEMP_ACTUELLE} - ${PREVISION}" 
+PREVISION=$(echo "$METEO_TEXTE" \
+    | awk '/Tomorrow/{flag=1;next}/°C/{if(flag){print; exit}}' \
+    | grep -oE "[0-9]+°C")
+
+
+LIGNE="${DATE} - ${HEURE} - ${VILLE} : ${TEMP_ACTUELLE} - ${PREVISION}"
+
+echo "$LIGNE" >> meteo.txt
+echo "Données enregistrées : $LIGNE"
+
+
 
