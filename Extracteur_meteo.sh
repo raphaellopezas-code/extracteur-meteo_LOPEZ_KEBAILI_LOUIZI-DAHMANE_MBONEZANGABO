@@ -18,8 +18,15 @@ DATE=$(date +"%Y-%m-%d")
 HEURE=$(date +"%H:%M")
 
 FICHIER="meteo_${DATE}.${FORMAT}"
+LOG="meteo_error.log"
 
 INFO=$(curl -s "wttr.in/${VILLE}?format=%t+%C+%w+%h+%v")
+
+if [ -z "$INFO" ]; then
+   echo "[$DATE $HEURE] Erreur: Impossible de récuperer la météo pour $VILLE" >> "$LOG"
+   echo "Erreur détectée , Vérifiez $LOG pour plus d'infos"
+   exit 1
+fi 
 
 read TEMP PREVISION_V1 PREVISION_V2 VENT HUMIDITE VISIBILITE <<< "$INFO"
 PREVISION="$PREVISION_V1 $PREVISION_V2"
@@ -27,7 +34,7 @@ PREVISION="$PREVISION_V1 $PREVISION_V2"
 if [ "$FORMAT" == "txt" ]; then
   LIGNE="${DATE} ${HEURE} ${VILLE} : ${INFO}"
   echo "$LIGNE" >> "$FICHIER"
-  echo "Données enregistrées : $LIGNE"
+  echo "Données enregistrées: $LIGNE"
 else
 
 echo "{
