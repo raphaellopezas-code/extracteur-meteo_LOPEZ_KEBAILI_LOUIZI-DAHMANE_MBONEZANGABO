@@ -8,15 +8,39 @@ fi
 
 VILLE=${1:-Toulouse}
 
+FORMAT="txt"
+if [ "$2" == "--json" ]; then 
+   FORMAT="json"
+fi
+
+
 DATE=$(date +"%Y-%m-%d")
 HEURE=$(date +"%H:%M")
 
-FICHIER="meteo_${DATE}.txt"
+FICHIER="meteo_${DATE}.${FORMAT}"
 
 INFO=$(curl -s "wttr.in/${VILLE}?format=%t+%C+%w+%h+%v")
 
-LIGNE="${DATE} ${HEURE} ${VILLE} : ${INFO}"
+read TEMP PREVISION_V1 PREVISION_V2 VENT HUMIDITE VISIBILITE <<< "$INFO"
+PREVISION="$PREVISION_V1 $PREVISION_V2"
 
-echo "$LIGNE" >> "$FICHIER"
+if [ "$FORMAT" == "txt" ]; then
+  LIGNE="${DATE} ${HEURE} ${VILLE} : ${INFO}"
+  echo "$LIGNE" >> "$FICHIER"
+  echo "Données enregistrées : $LIGNE"
+else
 
-echo "Données enregistrées : $LIGNE"
+echo "{
+
+\"date\": \"$DATE\",
+\"heure\": \"$HEURE\",
+\"ville\": \"$VILLE\",
+\"temperature\": \"$TEMP\",
+\"prevision\": \"$PREVISION\",
+\"vent\": \"$VENT\",
+\"humidite\": \"$HUMIDITE\",
+\"visibilite\": \"$VISIBILITE\"
+}" >> "$FICHIER"
+ 
+  echo "Données enregistrées  (JSON ) dans $FICHIER"
+fi 
