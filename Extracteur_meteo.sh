@@ -28,7 +28,7 @@ if [ -z "$INFO" ]; then
    exit 1
 fi 
 
-read -r TEMP PREVISION VENT HUMIDITE VISIBILITE <<< "$INFO"
+read -r TEMP PREVISION VENT VISIBILITE HUMIDITE <<< "$INFO"
 
 
 if [ "$FORMAT" == "txt" ]; then
