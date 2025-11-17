@@ -5,12 +5,13 @@
 
 ##  Objectif du projet
 Créer un script Shell permettant d'extraire périodiquement la température actuelle et la prévision du lendemain pour une ville donnée à partir du service [wttr.in](https://wttr.in).
+Le scrip enregistre les informations dans un fichier texte , chaque ligne correspondant à une exécution du script. Il inclut également des fonctionnalités supplémentaires comme la sauvegarde au format JSON et la gestion des erreurs avec logs.
 
 ##  Équipe
-- Lopez Raphaël
-- Houria Kebaili
-- Jean Darcy Mbonezangabo
-- Khaoula Louizi Dahmane
+- Lopez Raphaël (version 1)
+- Houria Kebaili (version 3)
+- Jean Darcy Mbonezangabo (version 2)
+- Khaoula Louizi Dahmane (version supplémentaires )
 
 Encadrants :  
 - M. Teyssié  
@@ -18,6 +19,8 @@ Encadrants :
 - M. Catteau
 
 ## Structure du projet
+
+-Extracteur 
 
 Utilisation de cron :
  Pour automatiser ce script avec CRON, tapez :
