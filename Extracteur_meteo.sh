@@ -28,7 +28,7 @@ if [ -z "$INFO" ]; then
    exit 1
 fi 
 
-read -r TEMP PREVISION VENT VISIBILITE HUMIDITE <<< "$INFO"
+read -r TEMP PREVISION VENT HUMIDITE VISIBILTE <<< "$INFO"
 
 
 if [ "$FORMAT" == "txt" ]; then
@@ -45,8 +45,8 @@ echo "{
 \"temperature\": \"$TEMP\",
 \"prevision\": \"$PREVISION\",
 \"vent\": \"$VENT\",
-\"humidite\": \"$HUMIDITE\",
-\"visibilite\": \"$VISIBILITE\"
+\"visibilite\": \"$HUMIDITE\",
+\"humidite": \"$VISIBILITE\"
 }" >> "$FICHIER"
  
   echo "Données enregistrées  (JSON ) dans $FICHIER"
