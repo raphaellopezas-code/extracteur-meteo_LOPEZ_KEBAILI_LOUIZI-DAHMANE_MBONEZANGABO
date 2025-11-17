@@ -20,7 +20,7 @@ HEURE=$(date +"%H:%M")
 FICHIER="meteo_${DATE}.${FORMAT}"
 LOG="meteo_error.log"
 
-INFO=$(curl -s "wttr.in/${VILLE}?format=%t+%C+%w+%h+%v")
+INFO=$(curl -s "wttr.in/${VILLE}?format=%t+%C+%v+%h+%w")
 
 if [ -z "$INFO" ]; then
    echo "[$DATE $HEURE] Erreur: Impossible de récuperer la météo pour $VILLE" >> "$LOG"
