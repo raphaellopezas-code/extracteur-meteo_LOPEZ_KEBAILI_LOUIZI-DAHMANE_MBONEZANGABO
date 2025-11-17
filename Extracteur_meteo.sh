@@ -1,4 +1,4 @@
-#!/bin/bash
+humidite#!/bin/bash
 
 if [ -z "$1" ]; then
    echo "Usage : $0 <Ville>"
@@ -20,7 +20,7 @@ HEURE=$(date +"%H:%M")
 FICHIER="meteo_${DATE}.${FORMAT}"
 LOG="meteo_error.log"
 
-INFO=$(curl -s "wttr.in/${VILLE}?format=%t+%C+%w+%h+%v")
+INFO=$(curl -s "wttr.in/${VILLE}?format=%t+%C+%v+%h+%w")
 
 if [ -z "$INFO" ]; then
    echo "[$DATE $HEURE] Erreur: Impossible de récuperer la météo pour $VILLE" >> "$LOG"
@@ -28,8 +28,8 @@ if [ -z "$INFO" ]; then
    exit 1
 fi 
 
-read TEMP PREVISION_V1 PREVISION_V2 VENT HUMIDITE VISIBILITE <<< "$INFO"
-PREVISION="$PREVISION_V1 $PREVISION_V2"
+read -r  TEMP PREVISION VENT VISIBILITE HUMIDITE  <<< "$INFO"
+
 
 if [ "$FORMAT" == "txt" ]; then
   LIGNE="${DATE} ${HEURE} ${VILLE} : ${INFO}"
@@ -45,8 +45,8 @@ echo "{
 \"temperature\": \"$TEMP\",
 \"prevision\": \"$PREVISION\",
 \"vent\": \"$VENT\",
-\"humidite\": \"$HUMIDITE\",
-\"visibilite\": \"$VISIBILITE\"
+\"humidite\": \"$VISIBILITE\",
+\"visibilite\": \"$HUMIDITE\"
 }" >> "$FICHIER"
  
   echo "Données enregistrées  (JSON ) dans $FICHIER"
