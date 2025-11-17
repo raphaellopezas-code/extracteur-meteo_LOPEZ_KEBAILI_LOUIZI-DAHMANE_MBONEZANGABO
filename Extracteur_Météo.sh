@@ -1,6 +1,9 @@
 #!/bin/bash
-
-VILLE=${1:-Toulouse}
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <ville>"
+    exit 1
+fi
+VILLE=$1
 FICHIER_TEMP="meteo_brut.txt"
 > "$FICHIER_TEMP"
 
