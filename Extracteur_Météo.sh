@@ -1,27 +1,22 @@
 #!/bin/bash
 
-VILLE=$1
+VILLE=${1:-Toulouse}
+FICHIER_TEMP="meteo_brut.txt"
+> "$FICHIER_TEMP"
 
-DATE=$(date +"%Y-%m-%d")
-HEURE=$(date +"%H:%M")
+curl -s "wttr.in/${VILLE}" -o "$FICHIER_TEMP"
 
-METEO_TEXTE=$(curl -s wttr.in/${VILLE}?format=v2)
+sed -i 's/\x1B\[[0-9;]*[JKmsu]//g' "$FICHIER_TEMP"
 
-if [[ -z "$METEO_TEXTE" ]]; then
-    METEO_TEXTE=$(curl -s wttr.in/${VILLE})
-fi
-
-TEMP_ACTUELLE=$(echo "$METEO_TEXTE" | grep -m1 -E "[0-9]+°C" | grep -oE "[0-9]+°C")
-
-PREVISION=$(echo "$METEO_TEXTE" \
-    | awk '/Tomorrow/{flag=1;next}/°C/{if(flag){print; exit}}' \
-    | grep -oE "[0-9]+°C")
+TEMP_ACTUELLE=$(grep -o '[+-]\?[0-9]\+' "$FICHIER_TEMP" | head -1 | sed 's/^+//')
 
 
-LIGNE="${DATE} - ${HEURE} - ${VILLE} : ${TEMP_ACTUELLE} - ${PREVISION}"
+DATE_DEMAIN=$(date -d tomorrow "+%a %d %b")
+TEMP_PREVUE=$(grep -A5 "$DATE_DEMAIN" "$FICHIER_TEMP" | grep -o '[+-]\?[0-9]\+' | head -2 | tail -1 | sed 's/^+//')
+DATE_COURANTE=$(date +"%Y-%m-%d - %H:%M")
 
-echo "$LIGNE" >> meteo.txt
-echo "Données enregistrées : $LIGNE"
+[ ! -f "meteo.txt" ] && touch "meteo.txt"
 
 
+echo "${DATE_COURANTE} - ${VILLE} : ${TEMP_ACTUELLE}°C - ${TEMP_PREVUE}°C" >> "meteo.txt"
 
