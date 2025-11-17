@@ -12,6 +12,6 @@ fichier_historique="meteo_${Jour}.txt"
 tmp_aujourdhui=$(curl -s "wttr.in/$VILLE?format=%t")
 tmp_demain=$(curl -s "wttr.in/$VILLE?format=%t&tomorrow")
 #ajout la ligne dans le fichier histrorique 
-echo"$DATE - $HEURE - $VILLE : $tmp_aujourdhui - $tmp_demain" >> "$fichier_historique"
+echo "$DATE - $HEURE - $VILLE : $tmp_aujourdhui - $tmp_demain" >> "$fichier_historique"
 
 
