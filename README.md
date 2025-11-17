@@ -20,9 +20,48 @@ Encadrants :
 
 ## Structure du projet
 
--Extracteur 
+-Extracteur Extracteur_Meteo.sh : script principal 
+ -meteo_YYYY-MM-DD.txt : historique quotidien (texte)
+ - meteo_YYY-MM-DD.json : option JSON si utilisée
+ - meteo_error.log: logs des erreurs avec timestamp
 
-Utilisation de cron :
+## Gestion des versions avec Git
+
+Le projet utilise Git pour suivre l'évolution du script et des fichiers associés. Chaque version majeure et variante est commitée régulièrement, avec éventuellement des branches spécifiques pour trvailler sur de nouvelles fonctionnalités avant de les fusionner dans la branche principale.
+
+## Tags Utilisés pour marquer les versions majeures et pour les variantes:
+
+-versions 1: V1.0 : Mise à jour du code de base pour qu'il soit conforme
+
+Les commits permettant de suivre l'évolution et les contributions de chaque membre de l'équipe
+
+## Versions du projet
+
+## Version 1: Script de base
+
+  -Récupération de la météo pour une ville donnée avec 'curl' 
+  -Extraction de la température actuelle et de la prévision du lendemain -formatage des informations dans 'meteo.txt' sur une suele ligne
+  
+## Version 2: Automatisation périodique
+
+ -Ville par défaut si aucun argument fourni (Toulouse) 
+ -Possibilité d'automatiser le script avec CRON 
+ -Les informations s'ajoutent automatiquement dans le fichier texte
+ 
+## version 3: Gestion de l'historique
+
+ -Chaque jour un nouveau fichier 'meteo_YYYYMMDD.txt' est créé
+ -Les nouvelles données s'ajoutent au fichier du jour 
+ -Utilisation du format texte uniquement pour rester compatible avec 'wttr.in'
+ 
+## Variantes supplémentaires
+
+ -Variante1: récupération d'informations supplémentaires: vent , humidité, visibilité 
+ -Variante2: sayvegarde ptionelle au format JSON 
+ -Variante3: gestion des erreurs avec logs horodatés ('meteo_error.log')
+
+
+## Utilisation de cron :
  Pour automatiser ce script avec CRON, tapez :
 
      crontab -e
