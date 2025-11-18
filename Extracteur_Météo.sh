@@ -1,25 +1,31 @@
 #!/bin/bash
-*
-#On crée une boucle au cas ou l'utilisateur ne rentre pas de ville
+
+# Vérifie si une ville est passée en argument
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <ville>"
     exit 1
 fi
 
-#onn initie ville = la ville donnée par l'utilisateur
-VILLE=$1
+VILLE_CIBLE=$1
+FICHIER_TEMP="meteo_brut.txt"
+> "$FICHIER_TEMP"
 
-#ici on récupère les données météo globaux
-METEO=$(curl -s "wttr.in/${VILLE}" | sed 's/\x1B\[[0-9;]*[JKmsu]//g')
+# Récupération des données météo
+curl -s "wttr.in/${VILLE_CIBLE}" -o "$FICHIER_TEMP"
+sed -i 's/\x1B\[[0-9;]*[JKmsu]//g' "$FICHIER_TEMP"
+# Température actuelle
+TEMP_ACTUELLE=$(grep -o '[+-]\?[0-9]\+' "$FICHIER_TEMP" | head -1 )
 
-#ici on récupérer les données météo de aujourd'hui exactement
-TEMP_ACTUELLE=$(echo "$METEO" | grep -o '[+-]\?[0-9]\+°C' | head -1)
-
-#ici on récupérer les données météo de demain exactement
+# Température prévue demain
 DATE_DEMAIN=$(date -d tomorrow "+%a %d %b")
-TEMP_DEMAIN=$(echo "$METEO" | grep -A8 "$DATE_DEMAIN" | grep -o '[+-]\?[0-9]\+°C' | head -1)
+TEMP_DEMAIN=$(grep -A5 "$DATE_DEMAIN" "$FICHIER_TEMP" | grep -o '[+-]\?[0-9]\+' | head -2 | tail -1 )
 
-# Affichage de tout
+
+# Date et heure
 DATE_COURANTE=$(date +"%Y-%m-%d - %H:%M")
-echo "${DATE_COURANTE} - ${VILLE} : ${TEMP_ACTUELLE} - ${TEMP_DEMAIN}"
+
+
+# Écriture des données
+echo "${DATE_COURANTE} - ${VILLE_CIBLE} : ${TEMP_ACTUELLE}°C - ${TEMP_DEMAIN}°C">>meteo.txt 
+
 
