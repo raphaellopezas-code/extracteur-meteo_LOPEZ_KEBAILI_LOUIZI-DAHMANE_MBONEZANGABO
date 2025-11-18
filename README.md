@@ -62,16 +62,49 @@ Les commits permettant de suivre l'évolution et les contributions de chaque mem
 
 
 ## Utilisation de cron :
- Pour automatiser ce script avec CRON, tapez :
+
+1° Automatisation avec cron
+
+Pour automatiser l'exécution du script `Extracteur_Météo.sh`, il faut créer une tâche cron.
+
+### Sous windows
+
+Il faut d'abord télécharger l'environnement WSL, pour cela:
+
+1. Vous allez sur le terminal de votre ordinateur, tapez
+	 wsl --install
+  Windows va installer un environnement Linux sur votre ordinateur et un terminal UBUNTU s'ouvre
+2. Entrer votre nom d'utilisateur et votre mot de passe
+3. Après ça, il te dira:
+	Installation successful!
+
+Après l'installation de WSL, il faut maintenant installer cron
+Pour cela il faut tapez ces 3 commandes:
+
+sudo apt update			# Mets à jour le package ubuntu
+sudo apt install cron		# Installation de cron
+sudo service cron start		# Démarre le service cron en arrière-plan
+ 
+Pour automatiser le script avec CRON, vous ouvrez alors le planificateur cron dans UBUNTU en tapant :
 
      crontab -e
 
- Puis ajoutez une ligne comme :
+on va te demander quel type d'éditeur tu veux utiliser, choisis 1 pour nano.
 
- Exemple : exécuter chaque jour à 08h00
- 0 8 * * * /chemin/vers/Extracteur_Météo.sh Toulouse
+Rajoutez la ligne de commande à la fin, comme par exemple celle-ci:
 
- Exemple : exécuter toutes les heures
- 0 * * * * /chemin/vers/Extracteur_Météo.sh
+* * * * * cd /chemin/vers/le répertoire/contenant/le script && /bin/bash Extracteur_Météo.sh Toulouse >> meteo.txt     # Il va se rendre d'abord dans le répertoire contenant le script puis exécuter le script toutes les minutes et envoie la sortie dans meteo.txt 
 
- Le fichier meteo.txt sera mis à jour automatiquement.
+Le fichier meteo.txt sera mis à jour automatiquement.
+
+### Sous macOS
+
+1. Ouvrir le terminal
+2. Positionnez vous dans le repertoire contenant le script en utilisant :
+	cd chemin/repertoire
+3. Donnez l'autorisation au script en utilisant :
+	chmod +X Extracteur_Météo.sh
+4. Ouvrez le planificateur cron : crontab -e
+5. Rajoutez la ligne de commande à la fin :
+
+* * * * * cd /chemin/vers/le répertoire/contenant/le script && ./Extracteur_Météo.sh Toulouse >> meteo.txt
