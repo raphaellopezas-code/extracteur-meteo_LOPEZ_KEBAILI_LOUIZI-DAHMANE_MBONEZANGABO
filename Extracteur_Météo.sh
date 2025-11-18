@@ -1,25 +1,27 @@
 #!/bin/bash
 
-VILLE=${1:-Toulouse}        # Ajoute Toulouse comme ville par default si aucun argument n'a été introduite
+# Ajoute Toulouse comme ville par default si aucun argument n'a été introduite
 
-DATE=$(date +"%Y-%m-%d")
-HEURE=$(date +"%H:%M")
+VILLE_CIBLE=${1:-Toulouse}
+FICHIER_TEMP="meteo_brut.txt"
+> "$FICHIER_TEMP"
 
-# 1. Récupération des données météo avec wttr.in
-# (format JSON)
-METEO_BRUTE=$(curl -s wttr.in/${VILLE}?format=j2)
+# Récupération des données météo
+curl -s "wttr.in/${VILLE_CIBLE}" -o "$FICHIER_TEMP"
+sed -i 's/\x1B\[[0-9;]*[JKmsu]//g' "$FICHIER_TEMP"
+# Température actuelle
+TEMP_ACTUELLE=$(grep -o '[+-]\?[0-9]\+' "$FICHIER_TEMP" | head -1 )
 
-# On veut récupérer la température actuelle
-TEMP_ACTUELLE=$(echo "$METEO_BRUTE" | grep '"avgtempC":' | head -n 1 | awk -F'"' '{print $4 "°C"}')
+# Température prévue demain
+DATE_DEMAIN=$(date -d tomorrow "+%a %d %b")
+TEMP_DEMAIN=$(grep -A5 "$DATE_DEMAIN" "$FICHIER_TEMP" | grep -o '[+-]\?[0-9]\+' | head -2 | tail -1 )
 
-# 2. Température prévue pour demain
-# On récupère une ligne spécifique de wttr.in
-PREVISION=$(echo "$METEO_BRUTE" | grep -A 20 '"date":' | head -n 21 | grep '"avgtempC"' | awk -F'"' '{print $4 "°C"}')
 
-# 3. Enregistrer les données dans meteo.txt
-LIGNE="${DATE} - ${HEURE} - ${VILLE} : ${TEMP_ACTUELLE} - ${PREVISION}" 
-echo "$LIGNE" >> meteo.txt
+# Date et heure
+DATE_COURANTE=$(date +"%Y-%m-%d - %H:%M")
 
-# Message à l'écran
-echo "Données enregistrées : $LIGNE"
+
+# Écriture des données
+echo "${DATE_COURANTE} - ${VILLE_CIBLE} : ${TEMP_ACTUELLE}°C - ${TEMP_DEMAIN}°C">>meteo.txt 
+
 
