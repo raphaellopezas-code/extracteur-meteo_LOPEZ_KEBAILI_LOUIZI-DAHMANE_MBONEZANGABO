@@ -31,7 +31,15 @@ Le projet utilise Git pour suivre l'évolution du script et des fichiers associ�
 
 ## Tags Utilisés pour marquer les versions majeures et pour les variantes:
 
--versions 1: V1.0 : Mise à jour du code de base pour qu'il soit conforme
+-versions 1: Mise à jour du code de base pour qu'il soit conforme
+-version 1: Version de la final de la v1
+-version 1: Version 1 terminer avec les commentaires 
+-version 2: Configuration de Toulouse Ville par défaut 
+-version 2: Configuration du CRON dans le README
+-version 3 : création du fichier historique 
+-version 3 : mise à jour quotidienne de l'historique météo
+-Variantes sup : variantes modifier et terminer 
+-Variantes sup : Variantes finaliser avec des commentaires 
 
 Les commits permettant de suivre l'évolution et les contributions de chaque membre de l'équipe
 
