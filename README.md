@@ -1,13 +1,14 @@
 
 # extracteur-meteo_LOPEZ_KEBAILI_LOUIZI-DAHMANE_MBONEZANGABO
-# Extracteur Météo
 
 #  Extracteur Météo
 
 
 ##  Objectif du projet
 Créer un script Shell permettant d'extraire périodiquement la température actuelle et la prévision du lendemain pour une ville donnée à partir du service [wttr.in](https://wttr.in).
-Le scrip enregistre les informations dans un fichier texte , chaque ligne correspondant à une exécution du script. Il inclut également des fonctionnalités supplémentaires comme la sauvegarde au format JSON et la gestion des erreurs avec logs.
+
+Le script enregistre les informations dans un fichier texte , chaque ligne correspondant à une exécution du script. Il inclut également des fonctionnalités supplémentaires comme la sauvegarde au format JSON et la gestion des erreurs avec logs.
+
 
 
 ##  Équipe
@@ -15,11 +16,7 @@ Le scrip enregistre les informations dans un fichier texte , chaque ligne corres
 - Houria Kebaili (version 3)
 - Jean Darcy Mbonezangabo (version 2)
 - Khaoula Louizi Dahmane (version supplémentaires )
-## Équipe
-- Lopez Raphaël
-- Houria Kebaili
-- Jean Darcy Mbonezangabo
-- Khaoula Louizi Dahmane
+
 
 
 Encadrants :  
@@ -28,7 +25,7 @@ Encadrants :
 - M. Catteau
 
 
-## Structure du projet
+
 ##  Structure du projet
 
 
@@ -128,3 +125,4 @@ Le fichier meteo.txt sera mis à jour automatiquement.
 5. Rajoutez la ligne de commande à la fin :
 
 * * * * * cd /chemin/vers/le répertoire/contenant/le script && ./Extracteur_Météo.sh Toulouse >> meteo.txt
+
