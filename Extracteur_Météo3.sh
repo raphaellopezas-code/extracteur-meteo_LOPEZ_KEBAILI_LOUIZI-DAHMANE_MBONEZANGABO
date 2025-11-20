@@ -1,10 +1,5 @@
 #!/bin/bash
 # version 3 Gestion d’historique
-#On vérifie si un argument est passé au script (on demande un nom de la ville)
-if [ -z "$1" ]; then
-   echo "Usage : $0 <Ville>"
-    exit 1
-
 fi
 #Toulouse par défaut (aucun arguement fourni)
 VILLE=${1:-Toulouse}
