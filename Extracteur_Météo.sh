@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# Vérifie si une ville est passée en argument
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <ville>"
-    exit 1
-fi
+# Ajoute Toulouse comme ville par default si aucun argument n'a été introduite
 
-VILLE_CIBLE=$1
+VILLE_CIBLE=${1:-Toulouse}
+
 FICHIER_TEMP="meteo_brut.txt"
 > "$FICHIER_TEMP"
 
