@@ -1,6 +1,5 @@
 #!/bin/bash
 # version 3 Gestion d’historique
-fi
 #Toulouse par défaut (aucun arguement fourni)
 VILLE=${1:-Toulouse}
 #Date et heure actuelles
