@@ -1,10 +1,5 @@
 #!/bin/bash
-#On vérifie si un argument est passé au script (on demande un nom de la ville)
-if [ -z "$1" ]; then
-   echo "Usage : $0 <Ville>"
-    exit 1
 
-fi
 #Si un nom de ville est donné on l'utilise ,sinon la ville par défaut sera toulouse 
 VILLE=${1:-Toulouse}
 #On définit un format par défaut : ici c'est texte
